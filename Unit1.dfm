@@ -1,45 +1,38 @@
-object Form1: TForm1
+object GraphicEditor: TGraphicEditor
   Left = 0
   Top = 0
   Caption = #1043#1088#1072#1092#1080#1095#1077#1089#1082#1080#1081' '#1088#1077#1076#1072#1082#1090#1086#1088
-  ClientHeight = 686
-  ClientWidth = 984
-  Color = clBtnFace
-  Constraints.MaxHeight = 1200
-  Constraints.MaxWidth = 1800
-  Constraints.MinHeight = 700
-  Constraints.MinWidth = 1000
+  ClientHeight = 761
+  ClientWidth = 1000
+  Color = clWhite
+  Constraints.MinHeight = 780
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  FormStyle = fsStayOnTop
+  Position = poDesktopCenter
+  WindowState = wsMaximized
   OnActivate = FormActivate
   TextHeight = 15
-  object PaintBox: TPaintBox
+  object PaintAreaImage: TImage
     Left = 185
     Top = 0
-    Width = 799
-    Height = 686
+    Width = 815
+    Height = 761
     Cursor = crCross
-    Margins.Left = 0
-    Margins.Top = 0
-    Margins.Bottom = 0
     Align = alClient
-    Color = clBtnFace
-    ParentColor = False
-    OnMouseDown = PaintBoxMouseDown
-    OnMouseMove = PaintBoxMouseMove
-    OnMouseUp = PaintBoxMouseUp
-    ExplicitLeft = 188
-    ExplicitTop = 5
+    Constraints.MinHeight = 600
+    OnMouseDown = PaintAreaImageMouseDown
+    OnMouseMove = PaintAreaImageMouseMove
+    OnMouseUp = PaintAreaImageMouseUp
+    ExplicitLeft = 184
   end
   object MainPanel: TPanel
     Left = 0
     Top = 0
     Width = 185
-    Height = 686
+    Height = 761
     Margins.Left = 0
     Margins.Top = 0
     Margins.Bottom = 0
@@ -51,9 +44,7 @@ object Form1: TForm1
     Color = clSeashell
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -24
-    ExplicitTop = 5
-    ExplicitHeight = 661
+    ExplicitHeight = 696
     object ToolTypeLbl: TLabel
       Left = 3
       Top = 3
@@ -75,18 +66,18 @@ object Form1: TForm1
     end
     object BrushPanel: TPanel
       Left = 3
-      Top = 148
+      Top = 169
       Width = 175
-      Height = 265
+      Height = 251
       Align = alTop
       BevelOuter = bvLowered
       BorderWidth = 1
       TabOrder = 0
-      ExplicitLeft = 5
-      ExplicitTop = 173
+      ExplicitLeft = 2
+      ExplicitTop = 175
       object ColorNameLbl: TLabel
-        Left = 8
-        Top = 27
+        Left = 9
+        Top = 23
         Width = 47
         Height = 23
         Margins.Left = 0
@@ -112,10 +103,11 @@ object Form1: TForm1
         ParentFont = False
       end
       object Label3: TLabel
-        Left = 68
-        Top = 6
-        Width = 39
+        Left = 2
+        Top = 2
+        Width = 171
         Height = 15
+        Align = alTop
         Alignment = taCenter
         Caption = #1054#1073#1097#1077#1077
         Font.Charset = DEFAULT_CHARSET
@@ -124,8 +116,11 @@ object Form1: TForm1
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
+        ExplicitLeft = 68
+        ExplicitTop = 6
+        ExplicitWidth = 39
       end
-      object BrushSizeTrackBar: TTrackBar
+      object PenSizeTrackBar: TTrackBar
         Left = 0
         Top = 222
         Width = 177
@@ -137,6 +132,7 @@ object Form1: TForm1
         TabOrder = 0
         TickMarks = tmBoth
         TickStyle = tsNone
+        OnChange = PenSizeTrackBarChange
       end
       object ColorGrid: TColorGrid
         Left = 8
@@ -176,7 +172,7 @@ object Form1: TForm1
     end
     object ToolsPanel: TPanel
       Left = 3
-      Top = 413
+      Top = 420
       Width = 175
       Height = 154
       Hint = #1054#1082#1088#1091#1075#1083#1077#1085#1085#1099#1081' '#1087#1088#1103#1084#1086#1091#1075#1086#1083#1100#1085#1080#1082
@@ -187,13 +183,13 @@ object Form1: TForm1
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
-      ExplicitLeft = 5
-      ExplicitTop = 401
+      ExplicitTop = 413
       object Label4: TLabel
-        Left = 49
-        Top = 6
-        Width = 76
+        Left = 2
+        Top = 2
+        Width = 171
         Height = 15
+        Align = alTop
         Alignment = taCenter
         Caption = #1048#1085#1089#1090#1088#1091#1084#1077#1085#1090#1099
         Font.Charset = DEFAULT_CHARSET
@@ -202,6 +198,9 @@ object Form1: TForm1
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
+        ExplicitLeft = 49
+        ExplicitTop = 6
+        ExplicitWidth = 76
       end
       object RectImgBtn: TImage
         Left = 115
@@ -401,21 +400,73 @@ object Form1: TForm1
         ShowHint = True
         OnClick = PencilImgBtnClick
       end
+      object ColorDropperImgBtn: TImage
+        Left = 21
+        Top = 109
+        Width = 41
+        Height = 33
+        Cursor = crHandPoint
+        Hint = #1054#1082#1088#1091#1075#1083#1077#1085#1085#1099#1081' '#1087#1088#1103#1084#1086#1091#1075#1086#1083#1100#1085#1080#1082
+        Center = True
+        ParentShowHint = False
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D494844520000001E0000
+          001E08060000003B30AEA2000000097048597300000B1300000B1301009A9C18
+          000001D64944415478DADDD63D481C411880E1B9681A4550632B4448A128A869
+          23DA68482C2CB4D3CA42144550024730C146B451D12611C94F294230100B51FC
+          6BEC8443410E4D3A118B04A2856242047D3F6617966547776EF71432F01437EB
+          FAE2CCEC9E09754F23F13F8573D1844A5C601DFBD90E57E10BCA3D7357F88C3E
+          FCCD46F82956516CB8FE115D71876F8BBA7F79050EE20A8789BA4396FB7D9470
+          030A706C119591C47894700AB53847BEC57D2FB01225DC8B7796F7A4518DCB4C
+          C3B2A76B28C23F3C0C71CF09EAB1E74ED8866B9CE823A5F76A114B4AEFB7699C
+          E239B6BD9336617F34E9CCD7DD100F8CDA844D517704C58DD1B061EF9E8EE18D
+          E1E7E41193474BF65C4EBBEC69CAF44B6F0B878DCA18C590E7731BBE661296A3
+          BF691995D3FB16DD18C4866D5862BB28B58C36DEB4BC61C25318C01C3AE28E9A
+          C2853872AE95E167DC5153F81526308B9E6C4483C239F881C74AFF3791CE4634
+          28DC8A052CE3A5EF5A09A695DEF348517F380F3B78A2F4C3BFE5CCCBE77E742A
+          FD663A448BD2A73EE3E10D8F28FD0CBA27F9195EA3190FF0079F308CDF51A2FE
+          B01C283958DF957EBFB63BD7E584CFE0037E450D0685E51D3BAFF43E2B672965
+          15BE29E7CB3BCEE13F5C129FC499D24B1A7BD014BEB3716FE16BC24B6F1FAFB5
+          5E210000000049454E44AE426082}
+        ShowHint = True
+        OnClick = ColorDropperImgBtnClick
+      end
+      object TextmgBtn: TImage
+        Left = 115
+        Top = 109
+        Width = 41
+        Height = 33
+        Cursor = crHandPoint
+        Hint = #1051#1072#1089#1090#1080#1082
+        Center = True
+        ParentShowHint = False
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D494844520000001E0000
+          001E08060000003B30AEA2000000097048597300000B1300000B1301009A9C18
+          0000008C4944415478DAEDD6DD0A80200C06D07CA9A0285FBE827AAA35A19B64
+          DAE64F454DD895FB3C940A9AE6A16114FE15BC60F599EBCD58A314860A1F2382
+          A92044729C7C149E8EB04D8463F9B4DFC2844543E15478C36A19EBAC585D4958
+          72154D49D83FD140F49E7A6AED315CF52AACB0C2B7C1EED20F81B9D06BC3CF90
+          7D39B09BB38C0CD9F78AC79EC2DF8477B504311FD5AC838F0000000049454E44
+          AE426082}
+        ShowHint = True
+        OnClick = TextImgBtnClick
+      end
     end
     object FilePanel: TPanel
       Left = 3
       Top = 20
       Width = 175
-      Height = 128
+      Height = 149
       Align = alTop
       BevelOuter = bvLowered
       TabOrder = 2
-      ExplicitTop = 289
       object Label5: TLabel
-        Left = 49
-        Top = 6
-        Width = 76
+        Left = 1
+        Top = 1
+        Width = 173
         Height = 15
+        Align = alTop
         Alignment = taCenter
         Caption = #1048#1079#1086#1073#1088#1072#1078#1077#1085#1080#1077
         Font.Charset = DEFAULT_CHARSET
@@ -424,14 +475,29 @@ object Form1: TForm1
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
+        WordWrap = True
+        ExplicitLeft = 0
+        ExplicitTop = 6
+        ExplicitWidth = 76
+      end
+      object FileNameLbl: TLabel
+        Left = 1
+        Top = 115
+        Width = 173
+        Height = 15
+        Align = alTop
+        Alignment = taCenter
+        Caption = #1060#1072#1081#1083' '#1085#1077' '#1074#1099#1073#1088#1072#1085
+        WordWrap = True
+        ExplicitLeft = 10
       end
       object ButtonGroup: TButtonGroup
         Left = 1
-        Top = 28
+        Top = 16
         Width = 173
         Height = 99
         Cursor = crHandPoint
-        Align = alBottom
+        Align = alTop
         BevelInner = bvNone
         BevelOuter = bvNone
         BorderStyle = bsNone
@@ -446,21 +512,130 @@ object Form1: TForm1
           item
             Caption = #1054#1090#1082#1088#1099#1090#1100
             Hint = 'CTRL + O'
-            OnClick = ButtonGroupItems0Click
+            OnClick = FileOpenBtnClick
           end
           item
             Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
             Hint = 'CTRL + S'
-            OnClick = ButtonGroupItems1Click
+            OnClick = FileSaveBtnClick
           end
           item
             Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1082#1072#1082
-            OnClick = ButtonGroupItems2Click
+            OnClick = FileSaveAsBtnClick
           end>
         ShowHint = True
         TabOrder = 0
-        ExplicitLeft = 4
-        ExplicitTop = 6
+        ExplicitTop = 28
+      end
+    end
+    object ClearPaintAreaBtn: TButton
+      Left = 3
+      Top = 720
+      Width = 175
+      Height = 34
+      Align = alBottom
+      Caption = #1054#1095#1080#1089#1090#1080#1090#1100
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnClick = ClearPaintAreaBtnClick
+      ExplicitTop = 655
+    end
+    object TextFormatPanel: TPanel
+      Left = 3
+      Top = 574
+      Width = 175
+      Height = 146
+      Align = alClient
+      BevelOuter = bvLowered
+      TabOrder = 4
+      ExplicitLeft = 2
+      ExplicitTop = 580
+      ExplicitHeight = 126
+      object Label1: TLabel
+        Left = 1
+        Top = 1
+        Width = 173
+        Height = 15
+        Align = alTop
+        Alignment = taCenter
+        Caption = #1058#1077#1082#1089#1090
+        ExplicitLeft = 113
+        ExplicitTop = 30
+        ExplicitWidth = 29
+      end
+      object Label6: TLabel
+        Left = 121
+        Top = 22
+        Width = 43
+        Height = 15
+        Caption = #1056#1072#1079#1084#1077#1088':'
+      end
+      object Label7: TLabel
+        Left = 9
+        Top = 22
+        Width = 36
+        Height = 15
+        Caption = #1057#1090#1080#1083#1100':'
+      end
+      object FontSizeComboBox: TComboBox
+        Left = 121
+        Top = 43
+        Width = 43
+        Height = 28
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ItemIndex = 0
+        ParentFont = False
+        TabOrder = 0
+        Text = '8'
+        Items.Strings = (
+          '8'
+          '9'
+          '10'
+          '12'
+          '22'
+          '38'
+          '72')
+      end
+      object FontBoldRadioBtn: TRadioButton
+        Left = 9
+        Top = 43
+        Width = 106
+        Height = 17
+        Caption = #1055#1086#1083#1091#1078#1080#1088#1085#1099#1081
+        TabOrder = 1
+      end
+      object FontItalicRadioBtn: TRadioButton
+        Left = 9
+        Top = 66
+        Width = 88
+        Height = 17
+        Caption = #1050#1091#1088#1089#1080#1074
+        TabOrder = 2
+      end
+      object FontStrikeOutRadioBtn: TRadioButton
+        Left = 9
+        Top = 112
+        Width = 113
+        Height = 17
+        Caption = #1047#1072#1095#1077#1088#1082#1085#1091#1090#1099#1081
+        TabOrder = 3
+      end
+      object FontUnderlineRadioBtn: TRadioButton
+        Left = 9
+        Top = 89
+        Width = 113
+        Height = 17
+        Caption = #1055#1086#1076#1095#1077#1088#1082#1085#1091#1090#1099#1081
+        TabOrder = 4
       end
     end
   end
@@ -470,6 +645,17 @@ object Form1: TForm1
     Top = 8
   end
   object OpenPictureDialog: TOpenPictureDialog
+    Filter = 
+      'All (*.wbmp;*.webp;*.svg;*.gif;*.jpg;*.jpeg;*.png;*.bmp;*.ico;*.' +
+      'emf;*.wmf;*.tif;*.tiff)|*.wbmp;*.webp;*.svg;*.gif;*.jpg;*.jpeg;*' +
+      '.png;*.bmp;*.ico;*.emf;*.wmf;*.tif;*.tiff|WBMP Images (*.wbmp)|*' +
+      '.wbmp|WebP Images (*.webp)|*.webp|Scalable Vector Graphics (*.sv' +
+      'g)|*.svg|JPEG Image File (*.jpg)|*.jpg|JPEG Image File (*.jpeg)|' +
+      '*.jpeg|Portable Network Graphics (*.png)|*.png|Bitmaps (*.bmp)|*' +
+      '.bmp|Icons (*.ico)|*.ico|Enhanced Metafiles (*.emf)|*.emf|Metafi' +
+      'les (*.wmf)|*.wmf|TIFF Images (*.tif)|*.tif|TIFF Images (*.tiff)' +
+      '|*.tiff'
+    Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
     Left = 232
     Top = 8
   end

@@ -9,19 +9,19 @@
 #include <Vcl.ComCtrls.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.ButtonGroup.hpp>
-#include <Vcl.Dialogs.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
+#include <Vcl.Imaging.jpeg.hpp>
 #include <Vcl.Menus.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.ExtDlgs.hpp>
+#include <Vcl.Dialogs.hpp>
 //---------------------------------------------------------------------------
-class TForm1 : public TForm
+class TGraphicEditor : public TForm
 {
 __published:	// IDE-managed Components
-	TPaintBox *PaintBox;
 	TPanel *MainPanel;
-	TTrackBar *BrushSizeTrackBar;
+	TTrackBar *PenSizeTrackBar;
 	TLabel *ColorNameLbl;
 	TLabel *Label2;
 	TLabel *Label3;
@@ -44,10 +44,24 @@ __published:	// IDE-managed Components
 	TButtonGroup *ButtonGroup;
 	TOpenPictureDialog *OpenPictureDialog;
 	TSavePictureDialog *SavePictureDialog;
-	void __fastcall PaintBoxMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift,
+	TImage *PaintAreaImage;
+	TButton *ClearPaintAreaBtn;
+	TLabel *FileNameLbl;
+	TImage *ColorDropperImgBtn;
+	TImage *TextmgBtn;
+	TPanel *TextFormatPanel;
+	TLabel *Label1;
+	TComboBox *FontSizeComboBox;
+	TLabel *Label6;
+	TLabel *Label7;
+	TRadioButton *FontBoldRadioBtn;
+	TRadioButton *FontItalicRadioBtn;
+	TRadioButton *FontStrikeOutRadioBtn;
+	TRadioButton *FontUnderlineRadioBtn;
+	void __fastcall PaintAreaImageMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift,
           int X, int Y);
-	void __fastcall PaintBoxMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
-	void __fastcall PaintBoxMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
+	void __fastcall PaintAreaImageMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
+	void __fastcall PaintAreaImageMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
 		  int X, int Y);
 	void __fastcall LineImgBtnClick(TObject *Sender);
 	void __fastcall CircleImgBtnClick(TObject *Sender);
@@ -59,19 +73,28 @@ __published:	// IDE-managed Components
 	void __fastcall FormActivate(TObject *Sender);
 	void __fastcall DetailedColorSelectionBtnClick(TObject *Sender);
 	void __fastcall ColorGridChange(TObject *Sender);
-	void __fastcall ButtonGroupItems0Click(TObject *Sender);
-	void __fastcall ButtonGroupItems1Click(TObject *Sender);
-	void __fastcall ButtonGroupItems2Click(TObject *Sender);
+	void __fastcall FileOpenBtnClick(TObject *Sender);
+	void __fastcall FileSaveBtnClick(TObject *Sender);
+	void __fastcall PenSizeTrackBarChange(TObject *Sender);
+	void __fastcall ClearPaintAreaBtnClick(TObject *Sender);
+	void __fastcall FileSaveAsBtnClick(TObject *Sender);
+	void __fastcall ColorDropperImgBtnClick(TObject *Sender);
+	void __fastcall TextImgBtnClick(TObject *Sender);
 private:
-	bool IsDrawing;
+	bool MouseDown;
+	bool MouseUp;
 	int StartX, StartY;
 	int DrawMode;
-	const TColor PaintBoxDefaultColor = clBtnFace;
 	TColor SelectedColor;
+    AnsiString FilePath;
+
+	void Draw(TCanvas *PaintAreaCanvas, int X, int Y);
+	void SaveImage(AnsiString FileExt);
+	TFontStyles GetFontStyle();
 public:		// User declarations
-	__fastcall TForm1(TComponent* Owner);
+	__fastcall TGraphicEditor(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TForm1 *Form1;
+extern PACKAGE TGraphicEditor *GraphicEditor;
 //---------------------------------------------------------------------------
 #endif
